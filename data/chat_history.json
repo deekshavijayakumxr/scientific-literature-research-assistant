@@ -1,0 +1,667 @@
+{
+  "Chat 1": [
+    {
+      "role": "user",
+      "content": "How is deep learning used in medical imaging?\n"
+    },
+    {
+      "role": "assistant",
+      "content": "Deep learning is used in medical imaging for classification, risk assessment, segmentation, diagnosis, prognosis, and prediction of therapy responses, including the analysis of MRI images.",
+      "evidence": [
+        {
+          "paper_number": 4,
+          "title": "Basics of Deep Learning: A Radiologist's Guide to Understanding Published Radiology Articles on Deep Learning",
+          "year": 2019,
+          "sentence": "Among the various techniques in artificial intelligence, deep learning has attained the highest popularity in medical imaging in recent years",
+          "similarity": 0.7771515846252441
+        },
+        {
+          "paper_number": 8,
+          "title": "Deep Learning in Neuroradiology",
+          "year": 2018,
+          "sentence": "Deep learning is a form of machine learning using a convolutional neural network architecture that shows tremendous promise for imaging applications",
+          "similarity": 0.7733782529830933
+        },
+        {
+          "paper_number": 6,
+          "title": "Deep learning in radiology: An overview of the concepts and a survey of the state of the art with focus on MRI",
+          "year": 2018,
+          "sentence": "Since the medical field of radiology mainly relies on extracting useful information from images, it is a very natural application area for deep learning, and research in this area has rapidly grown in recent years",
+          "similarity": 0.7713772058486938
+        },
+        {
+          "paper_number": 7,
+          "title": "Deep learning in medical imaging and radiation therapy",
+          "year": 2018,
+          "sentence": "The goals of this review paper on deep learning (DL) in medical imaging and radiation therapy are to (a) summarize what has been achieved to date; (b) identify common and unique challenges, and strategies that researchers have taken to address these challenges; and (c) identify some of the promising avenues for the future both in terms of applications as well as technical innovations",
+          "similarity": 0.7648380994796753
+        },
+        {
+          "paper_number": 6,
+          "title": "Deep learning in radiology: An overview of the concepts and a survey of the state of the art with focus on MRI",
+          "year": 2018,
+          "sentence": "In this article, we discuss the general context of radiology and opportunities for application of deep-learning algorithms",
+          "similarity": 0.7159839868545532
+        },
+        {
+          "paper_number": 3,
+          "title": "Applications of Deep Learning to Neuro-Imaging Techniques",
+          "year": 2019,
+          "sentence": "Many clinical applications based on deep learning and pertaining to radiology have been proposed and studied in radiology for classification, risk assessment, segmentation tasks, diagnosis, prognosis, and even prediction of therapy responses",
+          "similarity": 0.7043521404266357
+        },
+        {
+          "paper_number": 8,
+          "title": "Deep Learning in Neuroradiology",
+          "year": 2018,
+          "sentence": "Because of the high volume and wealth of multimodal imaging information acquired in typical studies, neuroradiology is poised to be an early adopter of deep learning",
+          "similarity": 0.7024034261703491
+        },
+        {
+          "paper_number": 4,
+          "title": "Basics of Deep Learning: A Radiologist's Guide to Understanding Published Radiology Articles on Deep Learning",
+          "year": 2019,
+          "sentence": "However, radiologists may have difficulty in understanding and interpreting these studies because the study methods of deep learning differ from those of traditional radiology",
+          "similarity": 0.6733707189559937
+        },
+        {
+          "paper_number": 3,
+          "title": "Applications of Deep Learning to Neuro-Imaging Techniques",
+          "year": 2019,
+          "sentence": "There are many other innovative applications of AI in various technical aspects of medical imaging, particularly applied to the acquisition of images, ranging from removing image artifacts, normalizing/harmonizing images, improving image quality, lowering radiation and contrast dose, and shortening the duration of imaging studies",
+          "similarity": 0.6213692426681519
+        },
+        {
+          "paper_number": 7,
+          "title": "Deep learning in medical imaging and radiation therapy",
+          "year": 2018,
+          "sentence": "We introduce the general principles of DL and convolutional neural networks, survey five major areas of application of DL in medical imaging and radiation therapy, identify common themes, discuss methods for dataset expansion, and conclude by summarizing lessons learned, remaining challenges, and future directions",
+          "similarity": 0.6128490567207336
+        }
+      ],
+      "sources": [
+        {
+          "number": 1,
+          "title": "Deep Learning in Medical Image Analysis",
+          "year": 2021,
+          "citations": 128,
+          "similarity": 0.7810655236244202
+        },
+        {
+          "number": 2,
+          "title": "State-of-the-art review on deep learning in medical imaging",
+          "year": 2018,
+          "citations": 190,
+          "similarity": 0.772004246711731
+        },
+        {
+          "number": 3,
+          "title": "Applications of Deep Learning to Neuro-Imaging Techniques",
+          "year": 2019,
+          "citations": 164,
+          "similarity": 0.7702560424804688
+        },
+        {
+          "number": 4,
+          "title": "Basics of Deep Learning: A Radiologist's Guide to Understanding Published Radiology Articles on Deep Learning",
+          "year": 2019,
+          "citations": 116,
+          "similarity": 0.7639216184616089
+        },
+        {
+          "number": 5,
+          "title": "Deep Learning in Medical Imaging",
+          "year": 2019,
+          "citations": 349,
+          "similarity": 0.7502777576446533
+        },
+        {
+          "number": 6,
+          "title": "Deep learning in radiology: An overview of the concepts and a survey of the state of the art with focus on MRI",
+          "year": 2018,
+          "citations": 553,
+          "similarity": 0.7342178821563721
+        },
+        {
+          "number": 7,
+          "title": "Deep learning in medical imaging and radiation therapy",
+          "year": 2018,
+          "citations": 756,
+          "similarity": 0.7188752889633179
+        },
+        {
+          "number": 8,
+          "title": "Deep Learning in Neuroradiology",
+          "year": 2018,
+          "citations": 300,
+          "similarity": 0.7186415195465088
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "content": "What about diagnosis specifically?\n"
+    },
+    {
+      "role": "assistant",
+      "content": "Deep learning plays a significant role in the diagnosis of medical conditions using medical imaging. According to [1] and [6], deep learning technology is widely applied in medical diagnosis, particularly in bioinformatics and medical imaging. The review of literature found that the application of deep learning is focused on extracting useful information from images, which is a natural application area for deep learning in the medical field of radiology. [7] states that research in this area has rapidly grown in recent years, with many clinical applications proposed and studied in radiology for classification, risk assessment, segmentation tasks, diagnosis, prognosis, and even prediction of therapy responses.",
+      "evidence": [
+        {
+          "paper_number": 1,
+          "title": "Deep Learning and Medical Diagnosis: A Review of Literature",
+          "year": 2018,
+          "sentence": "In this review the application of deep learning for medical diagnosis is addressed",
+          "similarity": 0.8200488090515137
+        },
+        {
+          "paper_number": 1,
+          "title": "Deep Learning and Medical Diagnosis: A Review of Literature",
+          "year": 2018,
+          "sentence": "Furthermore, based on the findings of this article, it can be noted that the application of deep learning technology is widespread, but the majority of applications are focused on bioinformatics, medical diagnosis and other similar fields",
+          "similarity": 0.8035741448402405
+        },
+        {
+          "paper_number": 6,
+          "title": "Deep learning and artificial intelligence in radiology: Current applications and future directions",
+          "year": 2018,
+          "sentence": "In this Special Issue, three groups of researchers applied deep learning to radiological imaging diagnosis using this modality",
+          "similarity": 0.7783679366111755
+        },
+        {
+          "paper_number": 7,
+          "title": "Deep learning in radiology: An overview of the concepts and a survey of the state of the art with focus on MRI",
+          "year": 2018,
+          "sentence": "Since the medical field of radiology mainly relies on extracting useful information from images, it is a very natural application area for deep learning, and research in this area has rapidly grown in recent years",
+          "similarity": 0.7612637281417847
+        },
+        {
+          "paper_number": 4,
+          "title": "Survey of explainable artificial intelligence techniques for biomedical imaging with deep neural networks",
+          "year": 2023,
+          "sentence": "The application of deep learning for medical imaging has to be interpreted with caution due to the health and safety concerns similar to blame attribution in the case of an accident involving autonomous cars",
+          "similarity": 0.7577545642852783
+        },
+        {
+          "paper_number": 5,
+          "title": "Applications of Deep Learning to Neuro-Imaging Techniques",
+          "year": 2019,
+          "sentence": "Many clinical applications based on deep learning and pertaining to radiology have been proposed and studied in radiology for classification, risk assessment, segmentation tasks, diagnosis, prognosis, and even prediction of therapy responses",
+          "similarity": 0.7549025416374207
+        },
+        {
+          "paper_number": 2,
+          "title": "Basics of Deep Learning: A Radiologist's Guide to Understanding Published Radiology Articles on Deep Learning",
+          "year": 2019,
+          "sentence": "Among the various techniques in artificial intelligence, deep learning has attained the highest popularity in medical imaging in recent years",
+          "similarity": 0.752921998500824
+        },
+        {
+          "paper_number": 7,
+          "title": "Deep learning in radiology: An overview of the concepts and a survey of the state of the art with focus on MRI",
+          "year": 2018,
+          "sentence": "In this article, we discuss the general context of radiology and opportunities for application of deep-learning algorithms",
+          "similarity": 0.7454965710639954
+        },
+        {
+          "paper_number": 6,
+          "title": "Deep learning and artificial intelligence in radiology: Current applications and future directions",
+          "year": 2018,
+          "sentence": "Taking these four studies together, we can interpret that deep learning is currently able to diagnose a number of conditions using radiological data, but such diagnostic models may not be robust to a change in location",
+          "similarity": 0.7339185476303101
+        },
+        {
+          "paper_number": 2,
+          "title": "Basics of Deep Learning: A Radiologist's Guide to Understanding Published Radiology Articles on Deep Learning",
+          "year": 2019,
+          "sentence": "However, radiologists may have difficulty in understanding and interpreting these studies because the study methods of deep learning differ from those of traditional radiology",
+          "similarity": 0.7258712649345398
+        }
+      ],
+      "sources": [
+        {
+          "number": 1,
+          "title": "Deep Learning and Medical Diagnosis: A Review of Literature",
+          "year": 2018,
+          "citations": 515,
+          "similarity": 0.810638427734375
+        },
+        {
+          "number": 2,
+          "title": "Basics of Deep Learning: A Radiologist's Guide to Understanding Published Radiology Articles on Deep Learning",
+          "year": 2019,
+          "citations": 116,
+          "similarity": 0.7830838561058044
+        },
+        {
+          "number": 3,
+          "title": "Deep Learning in Medical Image Analysis",
+          "year": 2021,
+          "citations": 128,
+          "similarity": 0.7600406408309937
+        },
+        {
+          "number": 4,
+          "title": "Survey of explainable artificial intelligence techniques for biomedical imaging with deep neural networks",
+          "year": 2023,
+          "citations": 273,
+          "similarity": 0.7576093077659607
+        },
+        {
+          "number": 5,
+          "title": "Applications of Deep Learning to Neuro-Imaging Techniques",
+          "year": 2019,
+          "citations": 164,
+          "similarity": 0.7523493766784668
+        },
+        {
+          "number": 6,
+          "title": "Deep learning and artificial intelligence in radiology: Current applications and future directions",
+          "year": 2018,
+          "citations": 242,
+          "similarity": 0.7403379678726196
+        },
+        {
+          "number": 7,
+          "title": "Deep learning in radiology: An overview of the concepts and a survey of the state of the art with focus on MRI",
+          "year": 2018,
+          "citations": 553,
+          "similarity": 0.7357903718948364
+        },
+        {
+          "number": 8,
+          "title": "Deep learning and radiomics in precision medicine",
+          "year": 2019,
+          "citations": 252,
+          "similarity": 0.7302342057228088
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "content": " What techniques are used for that?"
+    },
+    {
+      "role": "assistant",
+      "content": "Deep learning techniques commonly used for medical diagnosis in medical imaging include convolutional neural networks (CNNs), which have shown outstanding image classification performance in biomedical imaging, as stated in [5]. Additionally, CNNs are the most widely represented approach in medical image analysis, as reported in [2].",
+      "evidence": [
+        {
+          "paper_number": 1,
+          "title": "Deep Learning and Medical Diagnosis: A Review of Literature",
+          "year": 2018,
+          "sentence": "Furthermore, based on the findings of this article, it can be noted that the application of deep learning technology is widespread, but the majority of applications are focused on bioinformatics, medical diagnosis and other similar fields",
+          "similarity": 0.8032304048538208
+        },
+        {
+          "paper_number": 1,
+          "title": "Deep Learning and Medical Diagnosis: A Review of Literature",
+          "year": 2018,
+          "sentence": "In this review the application of deep learning for medical diagnosis is addressed",
+          "similarity": 0.7883188724517822
+        },
+        {
+          "paper_number": 4,
+          "title": "Basics of Deep Learning: A Radiologist's Guide to Understanding Published Radiology Articles on Deep Learning",
+          "year": 2019,
+          "sentence": "Among the various techniques in artificial intelligence, deep learning has attained the highest popularity in medical imaging in recent years",
+          "similarity": 0.771577000617981
+        },
+        {
+          "paper_number": 2,
+          "title": "Applications of Deep Learning to Neuro-Imaging Techniques",
+          "year": 2019,
+          "sentence": "Many clinical applications based on deep learning and pertaining to radiology have been proposed and studied in radiology for classification, risk assessment, segmentation tasks, diagnosis, prognosis, and even prediction of therapy responses",
+          "similarity": 0.7379319667816162
+        },
+        {
+          "paper_number": 8,
+          "title": "Translational AI and Deep Learning in Diagnostic Pathology",
+          "year": 2019,
+          "sentence": "This is resulting in the innovation of deep learning technologies that are specifically aimed at cellular imaging and practical applications that could transform diagnostic pathology",
+          "similarity": 0.719477653503418
+        },
+        {
+          "paper_number": 8,
+          "title": "Translational AI and Deep Learning in Diagnostic Pathology",
+          "year": 2019,
+          "sentence": "This paper reviews the different approaches to deep learning in pathology, the public grand challenges that have driven this innovation and a range of emerging applications in pathology",
+          "similarity": 0.7188252210617065
+        },
+        {
+          "paper_number": 5,
+          "title": "Survey of explainable artificial intelligence techniques for biomedical imaging with deep neural networks",
+          "year": 2023,
+          "sentence": "The application of deep learning for medical imaging has to be interpreted with caution due to the health and safety concerns similar to blame attribution in the case of an accident involving autonomous cars",
+          "similarity": 0.6805344820022583
+        },
+        {
+          "paper_number": 4,
+          "title": "Basics of Deep Learning: A Radiologist's Guide to Understanding Published Radiology Articles on Deep Learning",
+          "year": 2019,
+          "sentence": "However, radiologists may have difficulty in understanding and interpreting these studies because the study methods of deep learning differ from those of traditional radiology",
+          "similarity": 0.6728886961936951
+        },
+        {
+          "paper_number": 5,
+          "title": "Survey of explainable artificial intelligence techniques for biomedical imaging with deep neural networks",
+          "year": 2023,
+          "sentence": "Artificial Intelligence (AI) techniques of deep learning have revolutionized the disease diagnosis with their outstanding image classification performance",
+          "similarity": 0.672464907169342
+        }
+      ],
+      "sources": [
+        {
+          "number": 1,
+          "title": "Deep Learning and Medical Diagnosis: A Review of Literature",
+          "year": 2018,
+          "citations": 515,
+          "similarity": 0.8048141002655029
+        },
+        {
+          "number": 2,
+          "title": "Applications of Deep Learning to Neuro-Imaging Techniques",
+          "year": 2019,
+          "citations": 164,
+          "similarity": 0.7374696731567383
+        },
+        {
+          "number": 3,
+          "title": "Deep Learning in Medical Imaging",
+          "year": 2019,
+          "citations": 349,
+          "similarity": 0.7217459082603455
+        },
+        {
+          "number": 4,
+          "title": "Basics of Deep Learning: A Radiologist's Guide to Understanding Published Radiology Articles on Deep Learning",
+          "year": 2019,
+          "citations": 116,
+          "similarity": 0.7164676189422607
+        },
+        {
+          "number": 5,
+          "title": "Survey of explainable artificial intelligence techniques for biomedical imaging with deep neural networks",
+          "year": 2023,
+          "citations": 273,
+          "similarity": 0.7147769331932068
+        },
+        {
+          "number": 6,
+          "title": "Deep Learning in Medical Image Analysis",
+          "year": 2021,
+          "citations": 128,
+          "similarity": 0.7133874893188477
+        },
+        {
+          "number": 7,
+          "title": "What Is Machine Learning, Artificial Neural Networks and Deep Learning?—Examples of Practical Applications in Medicine",
+          "year": 2023,
+          "citations": 383,
+          "similarity": 0.7098908424377441
+        },
+        {
+          "number": 8,
+          "title": "Translational AI and Deep Learning in Diagnostic Pathology",
+          "year": 2019,
+          "citations": 277,
+          "similarity": 0.7096698880195618
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "content": "What are the advantages of CNNs?"
+    },
+    {
+      "role": "assistant",
+      "content": "Convolutional neural networks (CNNs) have several advantages in medical imaging, specifically for image classification tasks. They are the most widely represented approach in medical image analysis, as stated in [2], and are attracting interest across various domains, including radiology, where they have become dominant in computer vision tasks, as noted in [7]. CNNs are multilayered artificial neural networks with weighted connections between neurons that are iteratively adjusted through repeated exposure to training data, as explained in [6]. However, the provided evidence does not explicitly state the limitations of CNNs in medical imaging.",
+      "evidence": [
+        {
+          "paper_number": 1,
+          "title": "Deep Learning and Medical Diagnosis: A Review of Literature",
+          "year": 2018,
+          "sentence": "The results indicate that convolutional neural networks (CNN) are the most widely represented when it comes to deep learning and medical image analysis",
+          "similarity": 0.7293334007263184
+        },
+        {
+          "paper_number": 7,
+          "title": "Convolutional neural networks: an overview and application in radiology",
+          "year": 2018,
+          "sentence": "Convolutional neural network (CNN), a class of artificial neural networks that has become dominant in various computer vision tasks, is attracting interest across a variety of domains, including radiology",
+          "similarity": 0.7099136710166931
+        },
+        {
+          "paper_number": 7,
+          "title": "Convolutional neural networks: an overview and application in radiology",
+          "year": 2018,
+          "sentence": "• Familiarity with the concepts and advantages, as well as limitations, of convolutional neural network is essential to leverage its potential to improve radiologist performance and, eventually, patient care",
+          "similarity": 0.7053012847900391
+        },
+        {
+          "paper_number": 6,
+          "title": "Deep Learning: An Update for Radiologists",
+          "year": 2021,
+          "sentence": "Convolutional neural networks (CNNs), the core of deep learning methods for imaging, are multilayered artificial neural networks with weighted connections between neurons that are iteratively adjusted through repeated exposure to training data",
+          "similarity": 0.6443877220153809
+        },
+        {
+          "paper_number": 4,
+          "title": "Medical image analysis using deep learning algorithms",
+          "year": 2023,
+          "sentence": "In the field of medical image analysis within deep learning (DL), the importance of employing advanced DL techniques cannot be overstated",
+          "similarity": 0.6328852772712708
+        },
+        {
+          "paper_number": 6,
+          "title": "Deep Learning: An Update for Radiologists",
+          "year": 2021,
+          "sentence": "Familiarity with the key concepts described will help radiologists understand advances of deep learning in medical imaging and facilitate clinical adoption of these techniques",
+          "similarity": 0.6098012924194336
+        },
+        {
+          "paper_number": 4,
+          "title": "Medical image analysis using deep learning algorithms",
+          "year": 2023,
+          "sentence": "This extensive review of existing literature conducts a thorough examination of the most recent deep learning (DL) approaches designed to address the difficulties faced in medical healthcare, particularly focusing on the use of deep learning algorithms in medical image analysis",
+          "similarity": 0.6072676181793213
+        }
+      ],
+      "sources": [
+        {
+          "number": 1,
+          "title": "Deep Learning and Medical Diagnosis: A Review of Literature",
+          "year": 2018,
+          "citations": 515,
+          "similarity": 0.6426278948783875
+        },
+        {
+          "number": 2,
+          "title": "State-of-the-art review on deep learning in medical imaging",
+          "year": 2018,
+          "citations": 190,
+          "similarity": 0.6288880109786987
+        },
+        {
+          "number": 3,
+          "title": "Deep Learning in Medical Imaging",
+          "year": 2019,
+          "citations": 349,
+          "similarity": 0.6220377087593079
+        },
+        {
+          "number": 4,
+          "title": "Medical image analysis using deep learning algorithms",
+          "year": 2023,
+          "citations": 490,
+          "similarity": 0.6220238208770752
+        },
+        {
+          "number": 5,
+          "title": "Deep Learning in Medical Image Analysis",
+          "year": 2021,
+          "citations": 128,
+          "similarity": 0.6217085123062134
+        },
+        {
+          "number": 6,
+          "title": "Deep Learning: An Update for Radiologists",
+          "year": 2021,
+          "citations": 165,
+          "similarity": 0.6199502944946289
+        },
+        {
+          "number": 7,
+          "title": "Convolutional neural networks: an overview and application in radiology",
+          "year": 2018,
+          "citations": 4694,
+          "similarity": 0.6192353963851929
+        },
+        {
+          "number": 8,
+          "title": "An overview of deep learning in medical imaging",
+          "year": 2021,
+          "citations": 144,
+          "similarity": 0.6173640489578247
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "content": " How does this compare with traditional methods?"
+    },
+    {
+      "role": "assistant",
+      "content": "Convolutional neural networks (CNNs) are the most widely represented approach in medical image analysis, as stated in [2] and [1]. In image classification tasks for medical diagnosis in radiology, CNNs have shown promise in improving diagnostic performance and enhancing patient healthcare, as mentioned in [5] and [7]. However, the generalization performance of CNNs can be variable, and radiologists may have difficulty in understanding and interpreting deep learning studies, as noted in [3].",
+      "evidence": [
+        {
+          "paper_number": 2,
+          "title": "Convolutional neural networks: an overview and application in radiology",
+          "year": 2018,
+          "sentence": "Convolutional neural network (CNN), a class of artificial neural networks that has become dominant in various computer vision tasks, is attracting interest across a variety of domains, including radiology",
+          "similarity": 0.7135782241821289
+        },
+        {
+          "paper_number": 2,
+          "title": "Convolutional neural networks: an overview and application in radiology",
+          "year": 2018,
+          "sentence": "Being familiar with the concepts and advantages, as well as limitations, of CNN is essential to leverage its potential in diagnostic radiology, with the goal of augmenting the performance of radiologists and improving patient care",
+          "similarity": 0.7110947370529175
+        },
+        {
+          "paper_number": 4,
+          "title": "Variable generalization performance of a deep learning model to detect pneumonia in chest radiographs: A cross-sectional study",
+          "year": 2018,
+          "sentence": "BACKGROUND: There is interest in using convolutional neural networks (CNNs) to analyze medical imaging to provide computer-aided diagnosis (CAD)",
+          "similarity": 0.7030376195907593
+        },
+        {
+          "paper_number": 1,
+          "title": "Deep Learning and Medical Diagnosis: A Review of Literature",
+          "year": 2018,
+          "sentence": "The results indicate that convolutional neural networks (CNN) are the most widely represented when it comes to deep learning and medical image analysis",
+          "similarity": 0.6933667659759521
+        },
+        {
+          "paper_number": 3,
+          "title": "Basics of Deep Learning: A Radiologist's Guide to Understanding Published Radiology Articles on Deep Learning",
+          "year": 2019,
+          "sentence": "However, radiologists may have difficulty in understanding and interpreting these studies because the study methods of deep learning differ from those of traditional radiology",
+          "similarity": 0.6858373880386353
+        },
+        {
+          "paper_number": 7,
+          "title": "Deep learning in radiology: An overview of the concepts and a survey of the state of the art with focus on MRI",
+          "year": 2018,
+          "sentence": "Since the medical field of radiology mainly relies on extracting useful information from images, it is a very natural application area for deep learning, and research in this area has rapidly grown in recent years",
+          "similarity": 0.6761083006858826
+        },
+        {
+          "paper_number": 5,
+          "title": "Deep learning and artificial intelligence in radiology: Current applications and future directions",
+          "year": 2018,
+          "sentence": "If CNNs realize their promise in the context of radiology, they are anticipated to help radiologists achieve diagnostic excellence and to enhance patient healthcare",
+          "similarity": 0.6548033952713013
+        },
+        {
+          "paper_number": 7,
+          "title": "Deep learning in radiology: An overview of the concepts and a survey of the state of the art with focus on MRI",
+          "year": 2018,
+          "sentence": "Then, we present a survey of the research in deep learning applied to radiology",
+          "similarity": 0.645416259765625
+        },
+        {
+          "paper_number": 3,
+          "title": "Basics of Deep Learning: A Radiologist's Guide to Understanding Published Radiology Articles on Deep Learning",
+          "year": 2019,
+          "sentence": "This review article aims to explain the concepts and terms that are frequently used in deep learning radiology articles, facilitating general radiologists' understanding",
+          "similarity": 0.6212717294692993
+        },
+        {
+          "paper_number": 8,
+          "title": "Deep Learning: An Update for Radiologists",
+          "year": 2021,
+          "sentence": "Familiarity with the key concepts described will help radiologists understand advances of deep learning in medical imaging and facilitate clinical adoption of these techniques",
+          "similarity": 0.61234450340271
+        }
+      ],
+      "sources": [
+        {
+          "number": 1,
+          "title": "Deep Learning and Medical Diagnosis: A Review of Literature",
+          "year": 2018,
+          "citations": 515,
+          "similarity": 0.6308600306510925
+        },
+        {
+          "number": 2,
+          "title": "Convolutional neural networks: an overview and application in radiology",
+          "year": 2018,
+          "citations": 4694,
+          "similarity": 0.618055522441864
+        },
+        {
+          "number": 3,
+          "title": "Basics of Deep Learning: A Radiologist's Guide to Understanding Published Radiology Articles on Deep Learning",
+          "year": 2019,
+          "citations": 116,
+          "similarity": 0.6062907576560974
+        },
+        {
+          "number": 4,
+          "title": "Variable generalization performance of a deep learning model to detect pneumonia in chest radiographs: A cross-sectional study",
+          "year": 2018,
+          "citations": 1632,
+          "similarity": 0.6057838797569275
+        },
+        {
+          "number": 5,
+          "title": "Deep learning and artificial intelligence in radiology: Current applications and future directions",
+          "year": 2018,
+          "citations": 242,
+          "similarity": 0.6028881669044495
+        },
+        {
+          "number": 6,
+          "title": "Pediatric Posterior Fossa Tumors Classification and Explanation-Driven with Explainable Artificial Intelligence Models",
+          "year": 2024,
+          "citations": 5,
+          "similarity": 0.5863736867904663
+        },
+        {
+          "number": 7,
+          "title": "Deep learning in radiology: An overview of the concepts and a survey of the state of the art with focus on MRI",
+          "year": 2018,
+          "citations": 553,
+          "similarity": 0.5827943086624146
+        },
+        {
+          "number": 8,
+          "title": "Deep Learning: An Update for Radiologists",
+          "year": 2021,
+          "citations": 165,
+          "similarity": 0.5781915187835693
+        }
+      ]
+    }
+  ],
+  "Chat 2": []
+}
