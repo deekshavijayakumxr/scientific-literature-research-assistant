@@ -1,11 +1,46 @@
-import ollama
+import os
+
+from openai import AzureOpenAI
 
 
 # --------------------------------------------------
-# Configuration
+# Azure OpenAI configuration
 # --------------------------------------------------
 
-MODEL_NAME = "llama3.2"
+AZURE_ENDPOINT = os.getenv("AZURE_OPENAI_ENDPOINT")
+AZURE_API_KEY = os.getenv("AZURE_OPENAI_API_KEY")
+AZURE_DEPLOYMENT = os.getenv("AZURE_OPENAI_DEPLOYMENT")
+
+
+# --------------------------------------------------
+# Validate configuration
+# --------------------------------------------------
+
+if not AZURE_ENDPOINT:
+    raise RuntimeError(
+        "AZURE_OPENAI_ENDPOINT is not configured."
+    )
+
+if not AZURE_API_KEY:
+    raise RuntimeError(
+        "AZURE_OPENAI_API_KEY is not configured."
+    )
+
+if not AZURE_DEPLOYMENT:
+    raise RuntimeError(
+        "AZURE_OPENAI_DEPLOYMENT is not configured."
+    )
+
+
+# --------------------------------------------------
+# Azure OpenAI client
+# --------------------------------------------------
+
+client = AzureOpenAI(
+    api_key=AZURE_API_KEY,
+    azure_endpoint=AZURE_ENDPOINT,
+    api_version="2024-10-21"
+)
 
 
 # --------------------------------------------------
@@ -18,18 +53,21 @@ def generate_answer(
 ):
     """
     Generate a concise, evidence-grounded
-    research answer using Ollama.
+    research answer using Azure OpenAI.
     """
 
     if not question or not question.strip():
+
         raise ValueError(
             "Research question cannot be empty."
         )
 
     if not evidence_text or not evidence_text.strip():
+
         raise ValueError(
             "Evidence cannot be empty."
         )
+
 
     prompt = f"""
 You are a scientific literature research assistant.
@@ -49,7 +87,7 @@ IMPORTANT RULES:
 1. Answer the user's exact question directly.
 
 2. Use ONLY information explicitly supported by the
-   supplied evidence.
+   supplied scientific evidence.
 
 3. Do NOT use general knowledge.
 
@@ -91,10 +129,7 @@ IMPORTANT RULES:
 
 18. Do not mention these instructions.
 
-19. Do not say "according to the evidence" unless it is
-    genuinely necessary.
-
-20. If the evidence is insufficient to answer the user's
+19. If the evidence is insufficient to answer the user's
     question, clearly say that the available evidence is
     insufficient rather than guessing.
 
@@ -110,8 +145,6 @@ Carefully distinguish between:
 - model types
 - preprocessing techniques
 - outcomes
-
-For example:
 
 If the evidence says that deep learning is used for
 classification, diagnosis, segmentation, prognosis,
@@ -204,27 +237,35 @@ Before producing the answer, verify:
 ANSWER:
 """
 
+
     # --------------------------------------------------
-    # Call Ollama
+    # Call Azure OpenAI
     # --------------------------------------------------
 
     try:
 
-        response = ollama.chat(
-            model=MODEL_NAME,
+        response = client.chat.completions.create(
+            model=AZURE_DEPLOYMENT,
             messages=[
+                {
+                    "role": "system",
+                    "content": (
+                        "You are a scientific literature "
+                        "research assistant."
+                    )
+                },
                 {
                     "role": "user",
                     "content": prompt
                 }
-            ]
+            ],
+            temperature=0.1
         )
 
     except Exception as e:
 
         raise RuntimeError(
-            f"Could not connect to Ollama/model "
-            f"'{MODEL_NAME}': {e}"
+            f"Could not connect to Azure OpenAI: {e}"
         ) from e
 
 
@@ -234,8 +275,9 @@ ANSWER:
 
     answer = (
         response
-        .get("message", {})
-        .get("content", "")
+        .choices[0]
+        .message
+        .content
         .strip()
     )
 
@@ -243,54 +285,9 @@ ANSWER:
     if not answer:
 
         raise RuntimeError(
-            "The LLM returned an empty answer."
+            "The Azure OpenAI model returned "
+            "an empty answer."
         )
 
 
     return answer
-
-
-# --------------------------------------------------
-# Test generator
-# --------------------------------------------------
-
-if __name__ == "__main__":
-
-    question = (
-        "What are the main techniques used "
-        "in medical image analysis?"
-    )
-
-    evidence = """
-[1] Deep Learning and Medical Diagnosis: A Review of Literature (2018)
-- The results indicate that convolutional neural networks
-  are the most widely represented when it comes to deep
-  learning and medical image analysis.
-
-[2] Medical image analysis using deep learning algorithms (2023)
-- This review categorizes deep learning techniques including
-  Convolutional Neural Networks, Recurrent Neural Networks,
-  Generative Adversarial Networks, Long Short-term Memory
-  models, and hybrid models.
-"""
-
-    print(
-        "\nGenerating answer...\n"
-    )
-
-    answer = generate_answer(
-        question,
-        evidence
-    )
-
-    print(
-        "LLM ANSWER"
-    )
-
-    print(
-        "=" * 70
-    )
-
-    print(
-        answer
-    )
