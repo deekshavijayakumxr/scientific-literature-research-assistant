@@ -1,46 +1,36 @@
 import os
 
-from openai import AzureOpenAI
+from groq import Groq
 
 
 # --------------------------------------------------
-# Azure OpenAI configuration
+# Configuration
 # --------------------------------------------------
 
-AZURE_ENDPOINT = os.getenv("AZURE_OPENAI_ENDPOINT")
-AZURE_API_KEY = os.getenv("AZURE_OPENAI_API_KEY")
-AZURE_DEPLOYMENT = os.getenv("AZURE_OPENAI_DEPLOYMENT")
+MODEL_NAME = "openai/gpt-oss-120b"
 
 
 # --------------------------------------------------
-# Validate configuration
+# Initialize Groq client
 # --------------------------------------------------
 
-if not AZURE_ENDPOINT:
-    raise RuntimeError(
-        "AZURE_OPENAI_ENDPOINT is not configured."
+def get_client():
+    """
+    Create a Groq client using the GROQ_API_KEY
+    environment variable.
+    """
+
+    api_key = os.getenv("GROQ_API_KEY")
+
+    if not api_key:
+
+        raise RuntimeError(
+            "GROQ_API_KEY is not configured."
+        )
+
+    return Groq(
+        api_key=api_key
     )
-
-if not AZURE_API_KEY:
-    raise RuntimeError(
-        "AZURE_OPENAI_API_KEY is not configured."
-    )
-
-if not AZURE_DEPLOYMENT:
-    raise RuntimeError(
-        "AZURE_OPENAI_DEPLOYMENT is not configured."
-    )
-
-
-# --------------------------------------------------
-# Azure OpenAI client
-# --------------------------------------------------
-
-client = AzureOpenAI(
-    api_key=AZURE_API_KEY,
-    azure_endpoint=AZURE_ENDPOINT,
-    api_version="2024-10-21"
-)
 
 
 # --------------------------------------------------
@@ -53,7 +43,7 @@ def generate_answer(
 ):
     """
     Generate a concise, evidence-grounded
-    research answer using Azure OpenAI.
+    research answer using Groq.
     """
 
     if not question or not question.strip():
@@ -61,6 +51,7 @@ def generate_answer(
         raise ValueError(
             "Research question cannot be empty."
         )
+
 
     if not evidence_text or not evidence_text.strip():
 
@@ -186,21 +177,21 @@ If the question asks about:
 prioritize the clinical tasks explicitly identified
 in the evidence.
 
-If the question asks for:
+If the question asks about:
 
 "advantages"
 
 only describe advantages explicitly supported by
 the evidence.
 
-If the question asks for:
+If the question asks about:
 
 "limitations"
 
 only describe limitations explicitly supported by
 the evidence.
 
-If the question asks for:
+If the question asks about:
 
 "a comparison"
 
@@ -239,13 +230,17 @@ ANSWER:
 
 
     # --------------------------------------------------
-    # Call Azure OpenAI
+    # Call Groq
     # --------------------------------------------------
 
     try:
 
+        client = get_client()
+
         response = client.chat.completions.create(
-            model=AZURE_DEPLOYMENT,
+
+            model=MODEL_NAME,
+
             messages=[
                 {
                     "role": "system",
@@ -259,13 +254,15 @@ ANSWER:
                     "content": prompt
                 }
             ],
+
             temperature=0.1
         )
 
     except Exception as e:
 
         raise RuntimeError(
-            f"Could not connect to Azure OpenAI: {e}"
+            f"Could not connect to Groq/model "
+            f"'{MODEL_NAME}': {e}"
         ) from e
 
 
@@ -285,8 +282,7 @@ ANSWER:
     if not answer:
 
         raise RuntimeError(
-            "The Azure OpenAI model returned "
-            "an empty answer."
+            "The Groq model returned an empty answer."
         )
 
 

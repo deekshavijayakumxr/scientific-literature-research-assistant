@@ -1,5 +1,7 @@
 import sys
+import os
 import sqlite3
+import json
 from pathlib import Path
 
 # --------------------------------------------------
@@ -11,10 +13,36 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
+
 import streamlit as st
-import ollama
+from groq import Groq
 
 from src.rag import answer_research_question
+
+
+# --------------------------------------------------
+# Groq configuration
+# --------------------------------------------------
+
+GROQ_MODEL = "openai/gpt-oss-120b"
+
+
+def get_groq_client():
+    """
+    Create a Groq client using the GROQ_API_KEY
+    environment variable.
+    """
+
+    api_key = os.getenv("GROQ_API_KEY")
+
+    if not api_key:
+        raise RuntimeError(
+            "GROQ_API_KEY is not configured."
+        )
+
+    return Groq(
+        api_key=api_key
+    )
 
 
 # --------------------------------------------------
@@ -150,14 +178,16 @@ def get_messages(chat_id):
         }
 
         if row["evidence"]:
-            import json
-            message["evidence"] = json.loads(row["evidence"])
+            message["evidence"] = json.loads(
+                row["evidence"]
+            )
         else:
             message["evidence"] = []
 
         if row["sources"]:
-            import json
-            message["sources"] = json.loads(row["sources"])
+            message["sources"] = json.loads(
+                row["sources"]
+            )
         else:
             message["sources"] = []
 
@@ -173,8 +203,6 @@ def save_message(
     evidence=None,
     sources=None
 ):
-    import json
-
     conn = get_connection()
 
     conn.execute(
@@ -522,20 +550,36 @@ STANDALONE RESEARCH QUESTION:
 
         try:
 
-            rewrite_response = ollama.chat(
-                model="llama3.2",
-                messages=[
-                    {
-                        "role": "user",
-                        "content": rewrite_prompt
-                    }
-                ]
+            client = get_groq_client()
+
+            rewrite_response = (
+                client
+                .chat
+                .completions
+                .create(
+                    model=GROQ_MODEL,
+                    messages=[
+                        {
+                            "role": "system",
+                            "content": (
+                                "You are a scientific "
+                                "query-rewriting assistant."
+                            )
+                        },
+                        {
+                            "role": "user",
+                            "content": rewrite_prompt
+                        }
+                    ],
+                    temperature=0.1
+                )
             )
 
             rewritten_question = (
                 rewrite_response
-                .get("message", {})
-                .get("content", "")
+                .choices[0]
+                .message
+                .content
                 .strip()
             )
 
