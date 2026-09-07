@@ -1,262 +1,143 @@
+from pathlib import Path
+import urllib.request
+
 import numpy as np
 import pandas as pd
-
-from sklearn.metrics.pairwise import cosine_similarity
 from sentence_transformers import SentenceTransformer
+from sklearn.metrics.pairwise import cosine_similarity
 
 
-# --------------------------------------------------
+# ---------------------------------------------------------
 # Paths
-# --------------------------------------------------
+# ---------------------------------------------------------
 
-PAPERS_PATH = "data/processed/papers_clean.csv"
-EMBEDDINGS_PATH = "data/processed/paper_embeddings.npy"
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
-
-# --------------------------------------------------
-# Embedding model
-# --------------------------------------------------
+PAPERS_PATH = PROJECT_ROOT / "data" / "processed" / "papers_clean.csv"
+EMBEDDINGS_PATH = PROJECT_ROOT / "data" / "processed" / "paper_embeddings.npy"
 
 MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
-
-
-# --------------------------------------------------
-# Retrieval configuration
-# --------------------------------------------------
-
 DEFAULT_TOP_K = 5
 
-
-# --------------------------------------------------
-# Load paper database
-# --------------------------------------------------
-
-print("Loading paper database...")
-
-try:
-
-    papers = pd.read_csv(
-        PAPERS_PATH
-    )
-
-except Exception as e:
-
-    raise RuntimeError(
-        f"Could not load paper database "
-        f"from '{PAPERS_PATH}': {e}"
-    ) from e
-
-
-# --------------------------------------------------
-# Load embeddings
-# --------------------------------------------------
-
-try:
-
-    embeddings = np.load(
-        EMBEDDINGS_PATH
-    )
-
-except Exception as e:
-
-    raise RuntimeError(
-        f"Could not load paper embeddings "
-        f"from '{EMBEDDINGS_PATH}': {e}"
-    ) from e
-
-
-print(
-    f"Loaded {len(papers)} papers"
-)
-
-print(
-    f"Embeddings shape: {embeddings.shape}"
+# Hugging Face dataset
+HF_BASE_URL = (
+    "https://huggingface.co/datasets/"
+    "deekshavijayakumxr/"
+    "scientific-literature-research-assistant-data/"
+    "resolve/main/"
 )
 
 
-# --------------------------------------------------
-# Validate database
-# --------------------------------------------------
+# ---------------------------------------------------------
+# Download dataset files if they are missing
+# ---------------------------------------------------------
 
-if len(papers) != len(embeddings):
+def download_file(url, destination):
+    destination.parent.mkdir(parents=True, exist_ok=True)
 
-    raise RuntimeError(
-        "The number of papers does not match "
-        "the number of embeddings."
-    )
-
-
-# --------------------------------------------------
-# Load embedding model
-# --------------------------------------------------
-
-print("Loading embedding model...")
-
-embedding_model = SentenceTransformer(
-    MODEL_NAME
-)
-
-print(
-    "Embedding model loaded"
-)
-
-
-# --------------------------------------------------
-# Retrieve relevant papers
-# --------------------------------------------------
-
-def retrieve_papers(
-    question,
-    top_k=DEFAULT_TOP_K
-):
-    """
-    Retrieve the most semantically relevant
-    scientific papers for a research question.
-
-    Returns a pandas DataFrame containing the
-    retrieved papers and their similarity scores.
-    """
-
-    # --------------------------------------------------
-    # Validate question
-    # --------------------------------------------------
-
-    if not question or not question.strip():
-
-        raise ValueError(
-            "Research question cannot be empty."
-        )
-
-
-    # --------------------------------------------------
-    # Validate top_k
-    # --------------------------------------------------
-
-    if top_k is None:
-
-        top_k = DEFAULT_TOP_K
-
+    print(f"Downloading {destination.name}...")
 
     try:
+        urllib.request.urlretrieve(url, destination)
+    except Exception as e:
+        if destination.exists():
+            destination.unlink()
 
-        top_k = int(top_k)
+        raise RuntimeError(
+            f"Could not download {destination.name} from Hugging Face: {e}"
+        ) from e
 
-    except (TypeError, ValueError):
 
-        raise ValueError(
-            "top_k must be an integer."
+def ensure_data_files():
+    if not PAPERS_PATH.exists():
+        download_file(
+            HF_BASE_URL + "papers_clean.csv",
+            PAPERS_PATH
+        )
+
+    if not EMBEDDINGS_PATH.exists():
+        download_file(
+            HF_BASE_URL + "paper_embeddings.npy",
+            EMBEDDINGS_PATH
         )
 
 
-    if top_k <= 0:
+# ---------------------------------------------------------
+# Load data
+# ---------------------------------------------------------
 
-        raise ValueError(
-            "top_k must be greater than zero."
-        )
+ensure_data_files()
+
+try:
+    PAPERS = pd.read_csv(PAPERS_PATH)
+except Exception as e:
+    raise RuntimeError(
+        f"Could not load paper database from '{PAPERS_PATH}': {e}"
+    ) from e
 
 
-    # --------------------------------------------------
-    # Prevent requesting more papers than exist
-    # --------------------------------------------------
+try:
+    EMBEDDINGS = np.load(EMBEDDINGS_PATH)
+except Exception as e:
+    raise RuntimeError(
+        f"Could not load paper embeddings from '{EMBEDDINGS_PATH}': {e}"
+    ) from e
 
-    top_k = min(
-        top_k,
-        len(papers)
+
+if len(PAPERS) != len(EMBEDDINGS):
+    raise RuntimeError(
+        f"Paper/embedding mismatch: "
+        f"{len(PAPERS)} papers but {len(EMBEDDINGS)} embeddings."
     )
 
 
-    # --------------------------------------------------
-    # Create embedding for the question
-    # --------------------------------------------------
+# ---------------------------------------------------------
+# Embedding model
+# ---------------------------------------------------------
 
-    query_embedding = embedding_model.encode(
-        [question.strip()],
+MODEL = SentenceTransformer(MODEL_NAME)
+
+
+# ---------------------------------------------------------
+# Retrieval
+# ---------------------------------------------------------
+
+def retrieve_papers(question, top_k=DEFAULT_TOP_K):
+    """
+    Retrieve the most semantically similar papers for a question.
+    """
+
+    query_embedding = MODEL.encode(
+        [question],
         normalize_embeddings=True
     )
 
-
-    # --------------------------------------------------
-    # Compare question against paper embeddings
-    # --------------------------------------------------
-
     similarities = cosine_similarity(
         query_embedding,
-        embeddings
+        EMBEDDINGS
     )[0]
 
+    top_indices = np.argsort(similarities)[::-1][:top_k]
 
-    # --------------------------------------------------
-    # Get highest-scoring papers
-    # --------------------------------------------------
+    results = PAPERS.iloc[top_indices].copy()
+    results["similarity"] = similarities[top_indices]
 
-    top_indices = np.argsort(
-        similarities
-    )[::-1][:top_k]
+    return results.reset_index(drop=True)
 
 
-    # --------------------------------------------------
-    # Build result DataFrame
-    # --------------------------------------------------
-
-    results = papers.iloc[
-        top_indices
-    ].copy()
-
-
-    # --------------------------------------------------
-    # Add similarity score
-    # --------------------------------------------------
-
-    results["similarity"] = similarities[
-        top_indices
-    ]
-
-
-    # --------------------------------------------------
-    # Reset index
-    # --------------------------------------------------
-
-    results = results.reset_index(
-        drop=True
-    )
-
-
-    return results
-
-
-# --------------------------------------------------
-# Test retrieval
-# --------------------------------------------------
+# ---------------------------------------------------------
+# Terminal test
+# ---------------------------------------------------------
 
 if __name__ == "__main__":
+    question = "How is deep learning used in medical imaging?"
 
-    question = (
-        "How is deep learning used for "
-        "medical image analysis?"
-    )
+    results = retrieve_papers(question, top_k=5)
 
-    results = retrieve_papers(
-        question,
-        top_k=5
-    )
+    print("\nTop retrieved papers:\n")
 
-    print(
-        "\nTOP PAPERS\n"
-    )
-
-    print(
-        "=" * 70
-    )
-
-    for i, (_, paper) in enumerate(
-        results.iterrows(),
-        start=1
-    ):
-
+    for i, row in results.iterrows():
         print(
-            f"[{i}] "
-            f"{paper.get('title', '')} "
-            f"({paper.get('publication_year', '')}) "
-            f"Similarity: "
-            f"{paper['similarity']:.3f}"
+            f"{i + 1}. {row.get('title', 'Unknown title')}"
+            f" | similarity={row['similarity']:.4f}"
         )
